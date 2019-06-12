@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<div class="nav" >
+  <div *ngIf="userButtons">
+    <h2 style="display: inline-block;">My To-Dos</h2>
+    <a name="signUpBtn" (click)="btn('signUpBtn')" style="margin: 5px 5px 5px 5px">Sign Up!</a>
+    <a name="logInBtn" (click)="btn('logInBtn')" style="margin: 5px 5px 5px 5px">Log In!</a>
+  </div>
+  <div *ngIf="showLogout">
+    <a name="logoutBtn" href="http://localhost:4200/" (click)="btn('logoutBtn')" style="margin: 5px 5px 5px 5px">Logout!</a>
+  </div>
+</div>
+
+
+<form *ngIf="logInForm" style="border:1px solid #ccc">
+  <div class="container w3-animate-zoom w3-ul w3-card-4">
+    <h1>Log In</h1>
+    <p>Please fill in this form to Log In.</p>
+    <hr>
+
+    <label><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required>
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required>
+
+    <button type="submit" (click)="logIn()" class="submitbtn">Log In</button>
+  </div>
+</form>
+
+
+<form *ngIf="signUpForm" style="border:1px solid #ccc">
+  <div class="container w3-animate-zoom w3-ul w3-card-4 ">
+    <h1>Sign Up</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+
+    <label><b>Username</b></label>
+    <input type="text" placeholder="Enter a Username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}" required>
+    <label><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required>
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required>
+    <label><b>Repeat Password</b></label>
+    <input type="password" placeholder="Repeat Password" [(ngModel)]="password2" [ngModelOptions]="{standalone: true}" required>
+    <button type="submit" (click)="signUp()" class="submitbtn">Sign Up</button>
+  </div>
+</form>
+
+<div *ngIf="taskarea" class="textArea">
+  <h2 style="color:black">I have to?</h2>
+
+  <input style="width:500px; margin-left:15px" type="text" id="taskname" [(ngModel)]="task_name" placeholder="my task..." required>
+  <button style="width:100px" type="button" name="taskBtn" (click)="submitTask()">Done.</button>
+  <div class="w3-container" style="width:400px">
+    Total Tasks: <span id="taskLength"></span><br><br>
+    <ul class="w3-ul w3-card-4">
+      <li class="w3-display-container w3-animate-zoom" *ngFor="let task of tasks">{{task.name}}<span (click)="forwardTask([task.name])" class="w3-button w3-transparent w3-display-right" style="margin-right:95px">&#x21E8;</span><span (click)="removeTask(task.id)" class="w3-button w3-transparent w3-display-right">&times;</span><span (click)="updateTask(task.id, task.name)" class="w3-button w3-transparent w3-display-right" style="margin-right:40px">&#x270e;</span></li>
+    </ul>
+  </div>
+</div>
